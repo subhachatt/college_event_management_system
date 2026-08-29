@@ -4,11 +4,7 @@
  * ==========================================================================
  */
 
-// API base URL — set window.API_BASE_URL in config.js to override per environment.
-// For production this points to the Render backend; for local dev set it to http://127.0.0.1:8000
-const API_BASE_URL = (typeof window !== "undefined" && window.API_BASE_URL)
-  ? window.API_BASE_URL
-  : "https://college-event-management-api.onrender.com";
+const API_BASE_URL = "https://college-event-management-system-7ghj.onrender.com";
 
 
 // Auth Storage Keys
