@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Event - CampusHub Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon">🎓</div>
+        <span class="brand-title">CampusHub</span>
+        <span class="badge badge-purple" style="margin-left: 0.5rem;">Admin</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <!-- Injected dynamically by api.js -->
+      </ul>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected dynamically by api.js -->
+      </div>
+
+      <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    </div>
+  </nav>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-title">Admin Management</div>
+      <a href="admin-dashboard.html" class="admin-nav-item">
+        <span class="admin-nav-icon">📊</span>
+        <span>Overview & Stats</span>
+      </a>
+      <a href="create-event.html" class="admin-nav-item active">
+        <span class="admin-nav-icon">➕</span>
+        <span>Create New Event</span>
+      </a>
+      <a href="events.html" class="admin-nav-item" target="_blank">
+        <span class="admin-nav-icon">🌐</span>
+        <span>Public Catalog ↗</span>
+      </a>
+    </aside>
+
+    <main class="admin-main">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div style="margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <h1>Create College Event</h1>
+            <p>Publish a new workshop, festival, seminar, or competition.</p>
+          </div>
+          <a href="admin-dashboard.html" class="btn btn-secondary btn-sm">← Back to Dashboard</a>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <form id="create-event-form" onsubmit="handleCreateEvent(event)">
+              <div class="form-group">
+                <label class="form-label" for="title">Event Title *</label>
+                <input type="text" id="title" class="form-control" placeholder="e.g. AI & Robotics Hackathon 2026" required minlength="2">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="category">Category *</label>
+                  <select id="category" class="form-select" required>
+                    <option value="">Select Category</option>
+                    <option value="Technical">Technical</option>
+                    <option value="Hackathon">Hackathon</option>
+                    <option value="Workshop">Workshop</option>
+                    <option value="Cultural">Cultural</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Seminar">Seminar</option>
+                    <option value="Competition">Competition</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="organizer">Organizer / Department *</label>
+                  <input type="text" id="organizer" class="form-control" placeholder="e.g. Dept of Computer Science & IEEE" required minlength="2">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="description">Detailed Description *</label>
+                <textarea id="description" class="form-control" rows="4" placeholder="Provide schedule breakdown, eligibility, rules, prizes, or prerequisites..." required minlength="10"></textarea>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="venue">Event Venue / Room *</label>
+                  <input type="text" id="venue" class="form-control" placeholder="e.g. Main Auditorium / Lab 3" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="capacity">Maximum Seat Capacity *</label>
+                  <input type="number" id="capacity" class="form-control" placeholder="e.g. 100" required min="1" max="10000" value="50">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="event_date">Event Date *</label>
+                  <input type="date" id="event_date" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="start_time">Start Time *</label>
+                  <input type="time" id="start_time" class="form-control" required value="10:00">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="end_time">End Time *</label>
+                  <input type="time" id="end_time" class="form-control" required value="16:00">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="image_url">Cover Image URL (Optional)</label>
+                <input 
+                  type="url" 
+                  id="image_url" 
+                  class="form-control" 
+                  placeholder="https://images.unsplash.com/..."
+                  oninput="updateImagePreview(this.value)"
+                >
+                <p class="form-text">Paste a web image link or leave empty to use category default.</p>
+                <img id="image-preview" src="" alt="Preview" style="display: none; width: 100%; max-height: 200px; object-fit: cover; border-radius: var(--radius-md); margin-top: 0.75rem; border: 1px solid var(--border-light);">
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 2rem;">
+                <a href="admin-dashboard.html" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary btn-lg">Publish Event</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (requireAuth("ADMIN")) {
+        // Set min date to today
+        const todayStr = new Date().toISOString().split("T")[0];
+        document.getElementById("event_date").min = todayStr;
+        document.getElementById("event_date").value = todayStr;
+      }
+    });
+  </script>
+</body>
+</html>

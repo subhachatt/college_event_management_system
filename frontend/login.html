@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - CampusHub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon">🎓</div>
+        <span class="brand-title">CampusHub</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <!-- Injected dynamically by api.js -->
+      </ul>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected dynamically by api.js -->
+      </div>
+    </div>
+  </nav>
+
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>Welcome Back</h1>
+        <p>Sign in with your college account or select a demo role</p>
+      </div>
+
+      <!-- Demo Accounts 1-Click Fill -->
+      <div class="demo-accounts-box">
+        <div class="demo-accounts-title">
+          <span>⚡ Quick 1-Click Demo Login</span>
+        </div>
+        <div class="demo-btn-group">
+          <button type="button" class="demo-chip admin-chip" onclick="fillDemoCredentials('Admin', 'admin@college.edu', 'adminpassword123')">
+            👑 Admin
+          </button>
+          <button type="button" class="demo-chip" onclick="fillDemoCredentials('Rahul (CS)', 'rahul@student.edu', 'student123')">
+            👨‍🎓 Rahul (CS)
+          </button>
+          <button type="button" class="demo-chip" onclick="fillDemoCredentials('Priya (IT)', 'priya@student.edu', 'student123')">
+            👩‍🎓 Priya (IT)
+          </button>
+          <button type="button" class="demo-chip" onclick="fillDemoCredentials('Aman (EC)', 'aman@student.edu', 'student123')">
+            👨‍🎓 Aman (EC)
+          </button>
+        </div>
+      </div>
+
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label" for="email">College Email Address</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            class="form-control" 
+            placeholder="e.g. rahul@student.edu" 
+            required 
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            class="form-control" 
+            placeholder="••••••••" 
+            required 
+            autocomplete="current-password"
+          >
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top: 1rem;">
+          Sign In
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Don't have an account yet? <a href="register.html"><strong>Register as Student</strong></a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      redirectIfAuthenticated();
+    });
+  </script>
+</body>
+</html>

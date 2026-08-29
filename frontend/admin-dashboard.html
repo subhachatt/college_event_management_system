@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal - CampusHub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon">🎓</div>
+        <span class="brand-title">CampusHub</span>
+        <span class="badge badge-purple" style="margin-left: 0.5rem;">Admin</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <!-- Injected dynamically by api.js -->
+      </ul>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected dynamically by api.js -->
+      </div>
+
+      <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    </div>
+  </nav>
+
+  <div class="admin-layout">
+    <!-- Admin Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-title">Admin Management</div>
+      <a href="admin-dashboard.html" class="admin-nav-item active">
+        <span class="admin-nav-icon">📊</span>
+        <span>Overview & Stats</span>
+      </a>
+      <a href="create-event.html" class="admin-nav-item">
+        <span class="admin-nav-icon">➕</span>
+        <span>Create New Event</span>
+      </a>
+      <a href="events.html" class="admin-nav-item" target="_blank">
+        <span class="admin-nav-icon">🌐</span>
+        <span>Public Catalog ↗</span>
+      </a>
+      <a href="http://127.0.0.1:8000/docs" class="admin-nav-item" target="_blank">
+        <span class="admin-nav-icon">📖</span>
+        <span>FastAPI Swagger Docs ↗</span>
+      </a>
+    </aside>
+
+    <!-- Admin Main Content -->
+    <main class="admin-main">
+      <div class="admin-header">
+        <div>
+          <h1>Admin Control Center</h1>
+          <p>Real-time campus registration metrics, attendee capacity, and event management.</p>
+        </div>
+        <a href="create-event.html" class="btn btn-primary">
+          + Create New Event
+        </a>
+      </div>
+
+      <!-- KPI Statistics Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+        <div class="card" style="padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 50px; height: 50px; border-radius: var(--radius-md); background: #e0e7ff; color: #4f46e5; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">👨‍🎓</div>
+          <div>
+            <h3 id="admin-stat-students" style="font-size: 1.75rem; margin-bottom: 0.1rem;">--</h3>
+            <p style="font-size: 0.8rem; margin: 0;">Total Registered Students</p>
+          </div>
+        </div>
+
+        <div class="card" style="padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 50px; height: 50px; border-radius: var(--radius-md); background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🎪</div>
+          <div>
+            <h3 id="admin-stat-events" style="font-size: 1.75rem; margin-bottom: 0.1rem;">--</h3>
+            <p style="font-size: 0.8rem; margin: 0;">Total Events</p>
+          </div>
+        </div>
+
+        <div class="card" style="padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 50px; height: 50px; border-radius: var(--radius-md); background: #fef3c7; color: #d97706; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📅</div>
+          <div>
+            <h3 id="admin-stat-upcoming" style="font-size: 1.75rem; margin-bottom: 0.1rem;">--</h3>
+            <p style="font-size: 0.8rem; margin: 0;">Upcoming Active Events</p>
+          </div>
+        </div>
+
+        <div class="card" style="padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 50px; height: 50px; border-radius: var(--radius-md); background: #dcfce7; color: #15803d; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🎟️</div>
+          <div>
+            <h3 id="admin-stat-registrations" style="font-size: 1.75rem; margin-bottom: 0.1rem;">--</h3>
+            <p style="font-size: 0.8rem; margin: 0;">Active Confirmed Registrations</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <h3>Registrations by Event</h3>
+            <span class="badge badge-primary">Real-Time</span>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-registrations"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <h3>Events by Category</h3>
+            <span class="badge badge-purple">Distribution</span>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-categories"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Events Management Table -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3>All College Events</h3>
+            <p style="font-size: 0.825rem; margin: 0;">Manage events, view participant lists, edit details, or delete events.</p>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Event & Organizer</th>
+                <th>Category</th>
+                <th>Date & Time</th>
+                <th>Venue</th>
+                <th>Capacity</th>
+                <th>Registered</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-events-tbody">
+              <tr>
+                <td colspan="8" style="text-align: center; padding: 2rem;">Loading events data...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (requireAuth("ADMIN")) {
+        loadAdminDashboard();
+      }
+    });
+  </script>
+</body>
+</html>

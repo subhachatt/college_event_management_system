@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Details - CampusHub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/events.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon">🎓</div>
+        <span class="brand-title">CampusHub</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <!-- Injected dynamically by api.js -->
+      </ul>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected dynamically by api.js -->
+      </div>
+
+      <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <div style="margin-bottom: 1.5rem;">
+        <a href="events.html" class="btn btn-secondary btn-sm">
+          ← Back to Events Catalog
+        </a>
+      </div>
+
+      <div id="event-details-container">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 CampusHub • College Event Management System</div>
+        <div>FastAPI • SQLite • Vanilla JS • Modern CSS</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/events.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      loadEventDetailsPage();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Events - CampusHub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/events.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon">🎓</div>
+        <span class="brand-title">CampusHub</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <!-- Injected dynamically by api.js -->
+      </ul>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected dynamically by api.js -->
+      </div>
+
+      <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="events-header">
+        <h1>Discover Campus Events</h1>
+        <p>Search, filter, and register for university workshops, hackathons, sports, and cultural festivals.</p>
+      </div>
+
+      <!-- Search & Filters Toolbar -->
+      <div class="filter-bar">
+        <!-- Category Filter Chips -->
+        <div class="category-chips">
+          <button class="category-chip active" onclick="setCategoryFilter('All', this)">🌟 All Categories</button>
+          <button class="category-chip" onclick="setCategoryFilter('Technical', this)">💻 Technical</button>
+          <button class="category-chip" onclick="setCategoryFilter('Hackathon', this)">🚀 Hackathon</button>
+          <button class="category-chip" onclick="setCategoryFilter('Workshop', this)">🛠️ Workshop</button>
+          <button class="category-chip" onclick="setCategoryFilter('Cultural', this)">🎭 Cultural</button>
+          <button class="category-chip" onclick="setCategoryFilter('Sports', this)">⚽ Sports</button>
+          <button class="category-chip" onclick="setCategoryFilter('Seminar', this)">🎙️ Seminar</button>
+          <button class="category-chip" onclick="setCategoryFilter('Competition', this)">🏆 Competition</button>
+        </div>
+
+        <div class="filter-controls">
+          <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input 
+              type="text" 
+              id="search-input" 
+              class="form-control" 
+              placeholder="Search by event title, venue, or keyword..."
+            >
+          </div>
+
+          <div>
+            <select id="date-filter" class="form-select">
+              <option value="upcoming">📅 Upcoming Events</option>
+              <option value="all">🌐 All Events</option>
+              <option value="past">⏳ Past Events</option>
+            </select>
+          </div>
+
+          <div>
+            <select id="sort-select" class="form-select">
+              <option value="date_asc">Sort: Earliest Date</option>
+              <option value="date_desc">Sort: Latest Date</option>
+            </select>
+          </div>
+
+          <div>
+            <button class="btn btn-secondary btn-full" onclick="resetFilters()">
+              Reset Filters
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Events Grid -->
+      <div id="events-grid" class="events-grid">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 CampusHub • College Event Management System</div>
+        <div>FastAPI • SQLite • Vanilla JS • Modern CSS</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/events.js"></script>
+  <script>
+    function resetFilters() {
+      const searchInput = document.getElementById("search-input");
+      const dateFilter = document.getElementById("date-filter");
+      const sortSelect = document.getElementById("sort-select");
+
+      if (searchInput) searchInput.value = "";
+      if (dateFilter) dateFilter.value = "upcoming";
+      if (sortSelect) sortSelect.value = "date_asc";
+
+      // Reset active chip
+      document.querySelectorAll(".category-chip").forEach((chip, index) => {
+        chip.classList.toggle("active", index === 0);
+      });
+      currentCategoryFilter = "All";
+
+      loadEventsCatalog();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Check if category is passed via URL query params
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlCat = urlParams.get("category");
+      if (urlCat) {
+        currentCategoryFilter = urlCat;
+        document.querySelectorAll(".category-chip").forEach(chip => {
+          if (chip.innerText.includes(urlCat)) {
+            chip.classList.add("active");
+          } else {
+            chip.classList.remove("active");
+          }
+        });
+      }
+
+      setupEventFilterListeners();
+      loadEventsCatalog();
+    });
+  </script>
+</body>
+</html>

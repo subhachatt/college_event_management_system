@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusHub - College Event Management System</title>
+  <meta name="description" content="Discover, register, and manage college events, workshops, hackathons, and sports competitions seamlessly.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/events.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon">🎓</div>
+        <span class="brand-title">CampusHub</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <!-- Injected dynamically by api.js -->
+      </ul>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected dynamically by api.js -->
+      </div>
+
+      <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header style="background: var(--hero-gradient); padding: 5rem 0 4rem; text-align: center; border-bottom: 1px solid var(--border-light); position: relative; overflow: hidden;">
+    <div class="container" style="max-width: 860px;">
+      <span class="badge badge-purple" style="font-size: 0.85rem; padding: 0.4rem 1rem; margin-bottom: 1.25rem;">
+        ⚡ Official University Event Portal 2026
+      </span>
+      <h1 style="font-size: 3rem; margin-bottom: 1.25rem; letter-spacing: -0.03em;">
+        Never Miss a Moment of <br>
+        <span class="brand-title">Campus Life & Innovation</span>
+      </h1>
+      <p style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2.25rem; line-height: 1.7;">
+        Discover upcoming tech fests, 24-hour hackathons, cultural galas, AI workshops, and sports championships. Register with a single click and manage your event passes in real-time.
+      </p>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="events.html" class="btn btn-primary btn-lg">
+          🔍 Explore All Events
+        </a>
+        <a href="register.html" class="btn btn-secondary btn-lg">
+          Student Registration →
+        </a>
+      </div>
+
+      <!-- Quick Stats Bar -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; margin-top: 4rem; background: #ffffff; padding: 1.5rem; border-radius: var(--radius-xl); border: 1px solid var(--border-light); box-shadow: var(--shadow-md);">
+        <div>
+          <h3 style="font-size: 1.75rem; color: var(--primary);">25+</h3>
+          <p style="font-size: 0.825rem; margin: 0;">Annual Events</p>
+        </div>
+        <div>
+          <h3 style="font-size: 1.75rem; color: var(--secondary);">1,200+</h3>
+          <p style="font-size: 0.825rem; margin: 0;">Active Students</p>
+        </div>
+        <div>
+          <h3 style="font-size: 1.75rem; color: var(--success);">100%</h3>
+          <p style="font-size: 0.825rem; margin: 0;">Live Seat Tracking</p>
+        </div>
+        <div>
+          <h3 style="font-size: 1.75rem; color: var(--accent);">8</h3>
+          <p style="font-size: 0.825rem; margin: 0;">Event Categories</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Section: Featured Events -->
+  <main class="main-content">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <div>
+          <h2>Featured Upcoming Events</h2>
+          <p>Handpicked campus highlights happening over the next few weeks</p>
+        </div>
+        <a href="events.html" class="btn btn-outline-primary btn-sm">View Full Calendar →</a>
+      </div>
+
+      <div id="featured-events-grid" class="events-grid">
+        <div class="spinner"></div>
+      </div>
+
+      <!-- Category Spotlight -->
+      <section style="margin-top: 5rem;">
+        <div style="text-align: center; margin-bottom: 3rem;">
+          <h2>Explore By Category</h2>
+          <p>Find activities that match your passions, skills, and academic goals</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+          <a href="events.html?category=Technical" class="card" style="padding: 1.75rem; text-align: center; text-decoration: none; color: inherit;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">💻</div>
+            <h3 style="margin-bottom: 0.35rem;">Technical</h3>
+            <p style="font-size: 0.85rem;">Coding, robotics, AI, and developer conferences</p>
+          </a>
+
+          <a href="events.html?category=Cultural" class="card" style="padding: 1.75rem; text-align: center; text-decoration: none; color: inherit;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🎭</div>
+            <h3 style="margin-bottom: 0.35rem;">Cultural</h3>
+            <p style="font-size: 0.85rem;">Music concerts, dance, theatre, and festive nights</p>
+          </a>
+
+          <a href="events.html?category=Sports" class="card" style="padding: 1.75rem; text-align: center; text-decoration: none; color: inherit;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">⚽</div>
+            <h3 style="margin-bottom: 0.35rem;">Sports</h3>
+            <p style="font-size: 0.85rem;">Tournaments, track & field, and department cups</p>
+          </a>
+
+          <a href="events.html?category=Workshop" class="card" style="padding: 1.75rem; text-align: center; text-decoration: none; color: inherit;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🛠️</div>
+            <h3 style="margin-bottom: 0.35rem;">Workshops</h3>
+            <p style="font-size: 0.85rem;">Hands-on skill building with industry mentors</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- Why CampusHub Card -->
+      <section style="margin-top: 5rem; background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 3.5rem 2.5rem; box-shadow: var(--shadow-card);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; align-items: center;">
+          <div>
+            <span class="badge badge-primary" style="margin-bottom: 0.75rem;">Streamlined Management</span>
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Built for Students & Event Organizers</h2>
+            <p style="line-height: 1.7; margin-bottom: 1.5rem;">
+              CampusHub eliminates paper registrations and crowded counters. Everything is automated locally: live seat allocation, instant confirmation, calendar reminders, and verified attendee rosters for faculty admins.
+            </p>
+            <div style="display: flex; gap: 0.75rem;">
+              <a href="register.html" class="btn btn-primary">Join CampusHub</a>
+              <a href="login.html" class="btn btn-secondary">Admin Login</a>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: #dcfce7; color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0;">⚡</div>
+              <div>
+                <h4 style="margin-bottom: 0.2rem;">Instant One-Click Pass</h4>
+                <p style="font-size: 0.875rem;">Register instantly with verified student credentials.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: #e0e7ff; color: #4f46e5; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0;">🛡️</div>
+              <div>
+                <h4 style="margin-bottom: 0.2rem;">Capacity & Duplicate Protection</h4>
+                <p style="font-size: 0.875rem;">Backend strictly enforces seat quotas and prevents double booking.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: #fef3c7; color: #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0;">📊</div>
+              <div>
+                <h4 style="margin-bottom: 0.2rem;">Live Admin Analytics</h4>
+                <p style="font-size: 0.875rem;">Comprehensive dashboard charts and CSV export for organizers.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="nav-brand" style="margin-bottom: 1rem;">
+            <div class="brand-icon">🎓</div>
+            <span class="brand-title">CampusHub</span>
+          </div>
+          <p style="font-size: 0.875rem; max-width: 320px;">
+            The complete, self-contained College Event Management System powered by FastAPI, SQLAlchemy & SQLite.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Events Catalog</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Student Sign Up</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <ul class="footer-links">
+            <li><a href="events.html?category=Technical">Technical & Coding</a></li>
+            <li><a href="events.html?category=Cultural">Cultural & Arts</a></li>
+            <li><a href="events.html?category=Sports">Sports & Fitness</a></li>
+            <li><a href="events.html?category=Workshop">Workshops & Bootcamps</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Admin Portal</h4>
+          <ul class="footer-links">
+            <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+            <li><a href="create-event.html">Create Event</a></li>
+            <li><a href="http://127.0.0.1:8000/docs" target="_blank">Swagger API Docs</a></li>
+            <li><a href="http://127.0.0.1:8000/redoc" target="_blank">ReDoc API Docs</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 CampusHub • College Event Management System</div>
+        <div>FastAPI • SQLite • Vanilla JS • Modern CSS</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/events.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const grid = document.getElementById("featured-events-grid");
+      try {
+        const events = await api.get("/api/events", { date_filter: "upcoming" });
+        renderEventsGrid(events.slice(0, 6), grid);
+      } catch (err) {
+        grid.innerHTML = `<p style="text-align: center; color: var(--text-muted);">Failed to load events.</p>`;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - CampusHub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/events.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon">🎓</div>
+        <span class="brand-title">CampusHub</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <!-- Injected dynamically by api.js -->
+      </ul>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected dynamically by api.js -->
+      </div>
+
+      <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <!-- Welcome Hero -->
+      <div class="dashboard-hero">
+        <h1 id="dashboard-greeting">Welcome back! 👋</h1>
+        <p id="dashboard-dept">Explore new workshops, check your upcoming registrations, and manage your campus passes.</p>
+        
+        <div class="quick-actions">
+          <a href="events.html" class="btn btn-secondary">
+            🔍 Browse Events
+          </a>
+          <a href="my-registrations.html" class="btn btn-secondary">
+            🎟️ My Registrations
+          </a>
+          <a href="profile.html" class="btn btn-secondary">
+            👤 View Profile
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon-wrapper stat-icon-primary">📅</div>
+          <div class="stat-details">
+            <h3 id="stat-total-upcoming">--</h3>
+            <p>Total Upcoming Events</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrapper stat-icon-success">🎟️</div>
+          <div class="stat-details">
+            <h3 id="stat-my-regs">--</h3>
+            <p>My Active Registrations</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrapper stat-icon-purple">⏳</div>
+          <div class="stat-details">
+            <h3 id="stat-upcoming-regs">--</h3>
+            <p>Upcoming Registered Events</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next Registered Event Highlight -->
+      <div id="next-event-spotlight">
+        <div class="spinner"></div>
+      </div>
+
+      <!-- Upcoming Events Preview Section -->
+      <div class="section-header" style="margin-top: 3rem;">
+        <div>
+          <h2>Explore What's Happening Next</h2>
+          <p>Don't miss out on trending campus workshops and festivals</p>
+        </div>
+        <a href="events.html" class="btn btn-outline-primary btn-sm">View All Events →</a>
+      </div>
+
+      <div id="dashboard-events-preview" class="events-grid">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 CampusHub • College Event Management System</div>
+        <div>FastAPI • SQLite • Vanilla JS • Modern CSS</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (requireAuth("STUDENT")) {
+        loadStudentDashboard();
+      }
+    });
+  </script>
+</body>
+</html>
