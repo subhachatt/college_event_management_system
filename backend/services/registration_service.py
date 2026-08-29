@@ -2,11 +2,11 @@ from datetime import datetime, date, timezone
 from typing import List, Tuple
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session, joinedload
-from backend.models.event import Event
-from backend.models.registration import Registration
-from backend.models.user import User
-from backend.schemas.registration import RegistrationDetailResponse
-from backend.services.event_service import format_event_response
+from models.event import Event
+from models.registration import Registration
+from models.user import User
+from schemas.registration import RegistrationDetailResponse
+from services.event_service import format_event_response
 
 def register_user_for_event(db: Session, user_id: int, event_id: int) -> Registration:
     # 1. Check user exists

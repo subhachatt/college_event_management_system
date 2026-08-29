@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel
-from backend.schemas.event import EventResponse
-from backend.schemas.user import UserResponse
+from schemas.event import EventResponse
+from schemas.user import UserResponse
 
 class RegistrationCreate(BaseModel):
     event_id: int

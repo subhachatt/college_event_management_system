@@ -1,11 +1,11 @@
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
-from backend.database import get_db
-from backend.models.user import User
-from backend.schemas.event import EventCreate, EventUpdate, EventResponse, EventDetailResponse
-from backend.dependencies import get_current_admin, get_optional_current_user
-from backend.services.event_service import (
+from database import get_db
+from models.user import User
+from schemas.event import EventCreate, EventUpdate, EventResponse, EventDetailResponse
+from dependencies import get_current_admin, get_optional_current_user
+from services.event_service import (
     get_all_events, get_event_by_id, create_event, update_event, delete_event
 )
 

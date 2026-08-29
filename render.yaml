@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: college-event-management-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: college-events-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "1440"
+      - key: ALLOWED_ORIGINS
+        # Replace with your actual Vercel frontend URL after deployment
+        value: "https://your-project.vercel.app"
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+
+databases:
+  - name: college-events-db
+    plan: free

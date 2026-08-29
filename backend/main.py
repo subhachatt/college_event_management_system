@@ -1,12 +1,13 @@
 from contextlib import asynccontextmanager
+import os
 # pyrefly: ignore [missing-import]
 from fastapi import FastAPI
 # pyrefly: ignore [missing-import]
 from fastapi.middleware.cors import CORSMiddleware
-from backend.database import engine, Base, SessionLocal
-from backend.models import user, event, registration  # Ensure models are imported for metadata
-from backend.routers import auth_router, users_router, events_router, registrations_router, admin_router
-from backend.services.seed_service import seed_database_if_empty
+from database import engine, Base, SessionLocal
+from models import user, event, registration  # Ensure models are imported for metadata
+from routers import auth_router, users_router, events_router, registrations_router, admin_router
+from services.seed_service import seed_database_if_empty
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -34,10 +35,13 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Configure CORS for local frontend communication
+# Allow origins: comma-separated list in ALLOWED_ORIGINS env var (defaults to all for dev)
+_raw_origins = os.getenv("ALLOWED_ORIGINS", "*")
+ALLOWED_ORIGINS = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins for seamless local dev server communication
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -63,4 +67,4 @@ def root():
 if __name__ == "__main__":
     # pyrefly: ignore [missing-import]
     import uvicorn
-    uvicorn.run("backend.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=int(os.getenv("PORT", "8000")), reload=True)

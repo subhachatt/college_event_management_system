@@ -2,9 +2,9 @@ from datetime import datetime, date
 from typing import List, Optional, Tuple
 from sqlalchemy.orm import Session
 from sqlalchemy import or_, func
-from backend.models.event import Event
-from backend.models.registration import Registration
-from backend.schemas.event import EventCreate, EventUpdate, EventResponse, EventDetailResponse
+from models.event import Event
+from models.registration import Registration
+from schemas.event import EventCreate, EventUpdate, EventResponse, EventDetailResponse
 
 def calculate_event_stats(event: Event, db: Session, user_id: Optional[int] = None) -> Tuple[int, int, bool, bool, bool, Optional[str]]:
     """

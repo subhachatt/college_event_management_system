@@ -1,9 +1,9 @@
 from datetime import date, timedelta
 from sqlalchemy.orm import Session
-from backend.models.user import User
-from backend.models.event import Event
-from backend.models.registration import Registration
-from backend.services.auth_service import hash_password
+from models.user import User
+from models.event import Event
+from models.registration import Registration
+from services.auth_service import hash_password
 
 def seed_database_if_empty(db: Session):
     """

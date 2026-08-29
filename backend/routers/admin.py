@@ -3,13 +3,13 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import func
-from backend.database import get_db
-from backend.models.user import User
-from backend.models.event import Event
-from backend.models.registration import Registration
-from backend.schemas.admin import AdminDashboardStats, RegistrationByEvent, EventsByCategory, EventParticipantsSummary, ParticipantResponse
-from backend.schemas.user import UserResponse
-from backend.dependencies import get_current_admin
+from database import get_db
+from models.user import User
+from models.event import Event
+from models.registration import Registration
+from schemas.admin import AdminDashboardStats, RegistrationByEvent, EventsByCategory, EventParticipantsSummary, ParticipantResponse
+from schemas.user import UserResponse
+from dependencies import get_current_admin
 
 router = APIRouter(prefix="/api/admin", tags=["Admin"])
 

@@ -1,11 +1,11 @@
 from typing import List
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
-from backend.database import get_db
-from backend.models.user import User
-from backend.schemas.registration import RegistrationResponse, RegistrationDetailResponse
-from backend.dependencies import get_current_active_student, get_current_user
-from backend.services.registration_service import (
+from database import get_db
+from models.user import User
+from schemas.registration import RegistrationResponse, RegistrationDetailResponse
+from dependencies import get_current_active_student, get_current_user
+from services.registration_service import (
     register_user_for_event, cancel_user_registration, get_user_registrations
 )
 
